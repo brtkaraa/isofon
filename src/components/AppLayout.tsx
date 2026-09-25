@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, Building2, LogOut, Menu, X, RefreshCw, Megaphone, ChevronDown, Landmark, User, Home } from 'lucide-react';
+import { LayoutDashboard, FileText, Building2, LogOut, Menu, X, RefreshCw, Megaphone, ChevronDown, Landmark, User, Home, Moon, Sun } from 'lucide-react';
 import { useState, type ReactNode, useRef, useEffect } from 'react';
 import type { Company } from '@/lib/supabase';
 import BrandLogo from '@/components/BrandLogo';
@@ -16,7 +16,28 @@ type Props = {
 export default function AppLayout({ company, currentPage, onNavigate, onExit, children }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('darkMode');
+    if (saved === 'true') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    if (next) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
+  };
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -37,9 +58,9 @@ export default function AppLayout({ company, currentPage, onNavigate, onExit, ch
   ];
 
   return (
-    <div className="min-h-screen bg-[#f6f7f9] font-sans text-[#181818]">
+    <div className="min-h-screen bg-[#f6f7f9] dark:bg-[#121212] font-sans text-[#181818] dark:text-gray-100">
       {/* Top Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white text-[#181818] shadow-md border-b border-gray-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#1e1e1e] text-[#181818] dark:text-gray-100 shadow-md border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -61,8 +82,16 @@ export default function AppLayout({ company, currentPage, onNavigate, onExit, ch
               })}
             </nav>
 
-            {/* Profile dropdown */}
-            <div className="hidden lg:flex items-center gap-3 relative" ref={profileRef}>
+            {/* Dark mode toggle + Profile dropdown */}
+            <div className="hidden lg:flex items-center gap-3 relative">
+              <button
+                onClick={toggleDarkMode}
+                className="p-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-[#2a2a2a] dark:hover:bg-[#333] transition"
+                title={darkMode ? 'Açık moda geç' : 'Koyu moda geç'}
+              >
+                {darkMode ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-gray-600" />}
+              </button>
+              <div ref={profileRef} className="relative">
               <button onClick={() => setProfileOpen(!profileOpen)} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition">
                 <div className="w-8 h-8 rounded-full bg-[#ed1c24] flex items-center justify-center text-sm font-bold">{company?.name?.charAt(0).toUpperCase() || 'K'}</div>
                 <span className="text-sm font-medium max-w-[120px] truncate">{company?.name || 'Profilim'}</span>
@@ -82,6 +111,7 @@ export default function AppLayout({ company, currentPage, onNavigate, onExit, ch
                   </button>
                 </div>
               )}
+              </div>
             </div>
 
             {/* Mobile menu button */}
@@ -105,6 +135,10 @@ export default function AppLayout({ company, currentPage, onNavigate, onExit, ch
               );
             })}
             <div className="border-t border-gray-200 pt-2 mt-2">
+              <button onClick={toggleDarkMode} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition">
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {darkMode ? 'Açık Mod' : 'Koyu Mod'}
+              </button>
               <button onClick={() => { onNavigate('profile'); setMobileOpen(false); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition">
                 <User className="h-5 w-5" /> Firma Profilim
               </button>

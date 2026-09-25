@@ -35,7 +35,6 @@ export default function App() {
       setSession(s);
       if (s) {
         setView('app');
-        setPage('home');
       }
     });
 
@@ -46,7 +45,6 @@ export default function App() {
         setCompany(null);
         setCompanyChecked(false);
       }
-      // When session exists, the company-check effect will decide the view
     });
 
     return () => {
@@ -59,6 +57,7 @@ export default function App() {
   useEffect(() => {
     const loadCompany = async () => {
       if (!session?.user) return;
+      if (companyChecked) return;
       const { data } = await supabase
         .from('companies')
         .select('*')
@@ -66,8 +65,7 @@ export default function App() {
         .maybeSingle();
       if (data) {
         setCompany(data as Company);
-        setView('app');
-        setPage('home');
+        setView((prev) => (prev === 'registration' ? 'app' : prev));
       } else {
         setCompany(null);
         setView('registration');
@@ -75,7 +73,7 @@ export default function App() {
       setCompanyChecked(true);
     };
     if (session) loadCompany();
-  }, [session]);
+  }, [session, companyChecked]);
 
   const handleStart = () => {
     setView('auth');

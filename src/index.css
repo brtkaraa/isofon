@@ -98,3 +98,54 @@
 .iso-gold-line {
   background: linear-gradient(to right, transparent, #C8A24B, transparent);
 }
+
+/* ===== Dark mode overrides ===== */
+.dark {
+  color-scheme: dark;
+}
+.dark body {
+  background-color: #121212;
+  color: #e5e7eb;
+}
+
+/* Backgrounds */
+.dark .bg-white { background-color: #1e1e1e !important; }
+.dark .bg-\[\#f6f7f9\] { background-color: #161616 !important; }
+.dark .bg-\[\#fbe8e9\] { background-color: #2a1818 !important; }
+.dark .bg-gray-50 { background-color: #2a2a2a !important; }
+.dark .bg-gray-100 { background-color: #2a2a2a !important; }
+.dark .bg-gray-200 { background-color: #333333 !important; }
+.dark .bg-gray-300 { background-color: #444444 !important; }
+.dark .bg-\[\#f3f3f3\] { background-color: #2a2a2a !important; }
+
+/* Text */
+.dark .text-\[\#181818\] { color: #e5e7eb !important; }
+.dark .text-\[\#202020\] { color: #d1d5db !important; }
+.dark .text-gray-500 { color: #9ca3af !important; }
+.dark .text-gray-600 { color: #9ca3af !important; }
+.dark .text-gray-700 { color: #d1d5db !important; }
+.dark .text-gray-400 { color: #6b7280 !important; }
+
+/* Borders */
+.dark .border-gray-200 { border-color: #374151 !important; }
+.dark .border-gray-100 { border-color: #374151 !important; }
+.dark .border-gray-300 { border-color: #4b5563 !important; }
+
+/* Hover states */
+.dark .hover\:bg-gray-100:hover { background-color: #374151 !important; }
+.dark .hover\:bg-gray-50:hover { background-color: #374151 !important; }
+.dark .hover\:bg-gray-200:hover { background-color: #4b5563 !important; }
+
+/* Form inputs */
+.dark input, .dark textarea, .dark select {
+  background-color: #2a2a2a !important;
+  color: #e5e7eb !important;
+}
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Shadows */
+.dark .shadow-sm { box-shadow: 0 0 0 1px rgba(0,0,0,0.3) !important; }
+.dark .shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important; }
+.dark .shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important; }

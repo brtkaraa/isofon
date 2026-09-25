@@ -9,7 +9,7 @@ export default function BrandLogo({ compact = false }: Props) {
         <span className={`font-extrabold leading-none text-white ${compact ? 'text-lg' : 'text-2xl'}`}>İ</span>
       </div>
       <div className={compact ? 'flex items-baseline' : 'flex flex-col items-center'}>
-        <span className={`font-extrabold tracking-tight text-[#181818] ${compact ? 'text-lg' : 'text-3xl'}`}>
+        <span className={`font-extrabold tracking-tight text-[#181818] dark:text-gray-100 ${compact ? 'text-lg' : 'text-3xl'}`}>
           İSO<span className="text-[#ed1c24]">FON</span>
         </span>
         {!compact && (

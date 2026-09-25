@@ -123,7 +123,7 @@ export default function Landing({ onStart, onStartCompany, embedded = false, onN
       )}
 
       {/* HERO */}
-      <section className={`bg-white text-[#181818] ${embedded ? 'pt-12 pb-20 rounded-2xl' : 'pt-32 pb-32'} px-6 md:px-8 text-center relative overflow-hidden`}>
+      <section className={`bg-white text-[#181818] dark:bg-[#1a1a1a] dark:text-gray-100 ${embedded ? 'pt-20 pb-20' : 'pt-32 pb-32'} px-6 md:px-8 text-center relative overflow-hidden`}>
         <div className="absolute inset-0 grid-pattern pointer-events-none" />
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute -top-[30%] -right-[10%] w-[800px] h-[800px] rounded-full bg-[#ed1c24]/10 blur-3xl animate-pulse-slow" />
